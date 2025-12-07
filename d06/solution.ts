@@ -18,8 +18,8 @@ function part1(data: string[]): number {
     // create array of number ignoring ALL whitespace between them
     const nums: number[][] = data.slice(0, data.length-1).map(line => line.trim().split(RegExp('\\s+')).map(Number));
     const ops = data[data.length-1].trim().split(RegExp('\\s+'));
-    console.log("Numbers:", nums);
-    console.log("Operations:", ops);
+    // console.log("Numbers:", nums);
+    // console.log("Operations:", ops);
     for (let i = 0; i < nums[0].length; i++) {
         // get column i
         const col = nums.map(row => row[i]);
@@ -58,7 +58,7 @@ function part2(data: string[]): number {
         // empty the collector and move to next operation 
         if (col === '' || i === cells[0].length - 1) { 
             const calc = (ops[opsIdx] === '+') ? add(collector) : mul(collector);
-            console.log(`Column ${i}:`, collector, ' -> ', ops[opsIdx], ' = ', calc);
+            // console.log(`Column ${i}:`, collector, ' -> ', ops[opsIdx], ' = ', calc);
             totalSum += calc;
             collector = [];
             opsIdx++;
