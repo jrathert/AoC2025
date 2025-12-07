@@ -2,8 +2,8 @@
 // "Printing Department"
 // find the number of accessible paper rolls in a grid
 // a paper roll ("@") is accessible if it has less than 4 neighbors containing paper rolls
-// part 1: determine the number of accessible paper rolls in the initial arrangement
-// part 2: remove and iterate until no more paper rolls are accessible
+// Both parts solved in one go by iterating and counting/removing accessible rolls
+// until no more accessible remain, store the number of the very first iteration as part 1 
 
 import { inputFileName, readFileAsGrid } from '../aoc/input';
 import { copyGrid, listGridNeighbors, printGrid } from '../aoc/grid';
@@ -30,20 +30,10 @@ let M = grid[0]!.length;
 // print grid to check
 // printGrid(grid);
 
-// part 1: determine the number of accessible paper rolls in the initial arrangement
-let numAccessible = 0;
-for (let i = 0; i < N; i++) {
-    for (let j = 0; j < M; j++) {
-        if (isAccessible(grid, N, M, [i, j])) {
-            numAccessible++;
-        }
-    }
-}
-console.log('Part 1 - Number of accessible paper rolls:', numAccessible);
-
-// part 2: iterate until no more paper rolls are accessible
+let firstAccessible = -1;
 let totalAccessible = 0;
 
+// Iterate until no more paper rolls are accessible
 let nextGrid = copyGrid(grid);
 let thisIteration = -1;
 while (thisIteration != 0) {
@@ -52,16 +42,22 @@ while (thisIteration != 0) {
         for (let j = 0; j < M; j++) {
             if (isAccessible(grid, N, M, [i, j])) {
                 nextGrid[i]![j] = ".";
-                thisIteration++;
+                thisIteration++;                
             }
         }
     }
     grid = copyGrid(nextGrid);
     totalAccessible += thisIteration;
 
+    if (firstAccessible === -1) {
+        // part 1 result is the number of accessible rolls in the first iteration
+        firstAccessible = thisIteration;
+    }
+
     // console.log(thisIteration);
     // printGrid(grid);
 }
 
-console.log('Part 2 - Total number of rolls removed:', totalAccessible);
+console.log('Part 1 - Initial number of accessible rolls:', firstAccessible);
+console.log('Part 2 - Total number of paper rolls removed:', totalAccessible);
 // printGrid(grid);
