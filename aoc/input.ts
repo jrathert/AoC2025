@@ -18,6 +18,11 @@ export function readFileAsStringArray(filePath: string): string[] {
     return content.trim().split('\n').map(line => line.trim());
 }
 
+export function readFileAsStringArrayNoTrim(filePath: string): string[] {
+    const content = fs.readFileSync(filePath, 'utf-8');
+    return content.trim().split('\n');
+}
+
 export function readFileAsGrid(filePath: string): string[][] {
     const content = fs.readFileSync(filePath, 'utf-8');
     let lines = content.trim().split('\n').map(line => line.trim());
