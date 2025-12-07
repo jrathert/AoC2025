@@ -1,6 +1,10 @@
 import * as fs from 'fs';
 
 export function inputFileName(dirname: string): string {
+    // remove "/dist" if present somwhere in dirname
+    if (dirname.includes('/dist/')) {
+        dirname = dirname.replace('/dist/', '/');
+    }
     const testmode = process.argv.includes('--test');
     return dirname + '/' + (testmode ? 'testdata.txt' : 'input.txt');
 }
