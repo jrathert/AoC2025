@@ -1,9 +1,9 @@
 // day 4 solution
-// "paper roll arrangement"
+// "Printing Department"
 // find the number of accessible paper rolls in a grid
 // a paper roll ("@") is accessible if it has less than 4 neighbors containing paper rolls
-// task 1: determine the number of accessible paper rolls in the initial arrangement
-// task 2: remove and iterate until no more paper rolls are accessible
+// part 1: determine the number of accessible paper rolls in the initial arrangement
+// part 2: remove and iterate until no more paper rolls are accessible
 
 import { inputFileName, readFileAsGrid } from '../aoc/input';
 import { copyGrid, listGridNeighbors, printGrid } from '../aoc/grid';
@@ -30,7 +30,7 @@ let M = grid[0]!.length;
 // print grid to check
 // printGrid(grid);
 
-// task 1: determine the number of accessible paper rolls in the initial arrangement
+// part 1: determine the number of accessible paper rolls in the initial arrangement
 let numAccessible = 0;
 for (let i = 0; i < N; i++) {
     for (let j = 0; j < M; j++) {
@@ -39,9 +39,9 @@ for (let i = 0; i < N; i++) {
         }
     }
 }
-console.log('Task 1 - Number of accessible paper rolls:', numAccessible);
+console.log('Part 1 - Number of accessible paper rolls:', numAccessible);
 
-// task 2: iterate until no more paper rolls are accessible
+// part 2: iterate until no more paper rolls are accessible
 let totalAccessible = 0;
 
 let nextGrid = copyGrid(grid);
@@ -63,5 +63,5 @@ while (thisIteration != 0) {
     // printGrid(grid);
 }
 
-console.log('Task 2 - Total number of rolls removed:', totalAccessible);
+console.log('Part 2 - Total number of rolls removed:', totalAccessible);
 // printGrid(grid);

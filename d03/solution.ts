@@ -1,8 +1,8 @@
 // day 3 solution
-// "joltage banks"
+// "Lobby"
 // find the maximum joltage value in a bank represented as a string of digits
-// task 1: find the maximum joltage made by combining the two highest digits
-// task 2: find the maximum joltage made by combining the n highest digits
+// part 1: find the maximum joltage made by combining the two highest digits
+// part 2: find the maximum joltage made by combining the n highest digits
 // using a greedy approach, calling the respective function recursively
 
 import { inputFileName, readFileAsStringArray } from '../aoc/input';
@@ -54,10 +54,10 @@ function processBank(data: string[], n: number) {
     return sum;
 }
 
-// task 1: find the maximum joltage made by combining the two highest digits
-let sum = processBank(data, 2);
-console.log('Task 1 - Sum:', sum);
+// part 1: find the maximum joltage made by combining the two highest digits
+const sum2 = processBank(data, 2);
+console.log('Part 1 - max joltage of 2:', sum2);
 
-// task 2: find the maximum joltage made by combining the 12 highest digits
-sum = processBank(data, 12);
-console.log('Task 2 - Sum:', sum);
+// part 2: find the maximum joltage made by combining the 12 highest digits
+const sum12 = processBank(data, 12);
+console.log('Part 2 - max joltage of 12:', sum12);

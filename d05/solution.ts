@@ -1,8 +1,8 @@
 // day 5 solution
-// "slice management"
+// "Cafeteria"
 // manage a set of slices (ranges) and determine if numbers are contained in any slice
-// task 1: add slices and compact the set
-// task 2: determine how many numbers are contained in the slices
+// part 1: add slices and compact the set
+// part 2: determine how many numbers are contained in the slices
 
 import { inputFileName, readFileAsStringArray } from "../aoc/input";
 
@@ -112,10 +112,10 @@ for (let line of input) {
     }
 }
 
-// task 1: just tell how many of the number are contained in the slices 
+// part 1: just tell how many of the number are contained in the slices 
 console.log('Number of selected fresh IDs:', numFresh);
 
-// task 2: tell the total length of all slices 
+// part 2: tell the total length of all slices 
 console.log('Total number of fresh IDs:', ss.totalLength());
 
 

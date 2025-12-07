@@ -1,12 +1,12 @@
 // day 2 solution
-// "identifikationsnummern"
+// "Gift Shop"
 // find invalid identification numbers in given ranges
 // invalid means: made by repeating a smaller fragment, e.g. 123123 or 1212 or 11 or 999999
 // alternative definition: made by writing the same number twice, e.g. 1212 or 999999 or 123123
 
 import { inputFileName, readFileAsString } from "../aoc/input";
 
-// task 1: check if a number exactly consists of the same number appended twice
+// part 1: check if a number exactly consists of the same number appended twice
 function consistsOfSameNumberTwice(text: string): boolean {
     if (text.length % 2 !== 0) return false;
     const halfLength = text.length / 2;
@@ -15,7 +15,7 @@ function consistsOfSameNumberTwice(text: string): boolean {
     return firstHalf === secondHalf;
 }
 
-// task 2: check if a number exactly consists of a smaller fragment repeated
+// part 2: check if a number exactly consists of a smaller fragment repeated
 function consistsOfRepeatedFragment(text: string, fragment: string): boolean {
     if (fragment.length === 0) return false;
     const repeatCount = text.length / fragment.length;
@@ -64,10 +64,10 @@ function processRanges(exactTwice: boolean) {
     return sum;
 }
 
-// task 1: find invalid IDs made by repeating the same number twice
+// part 1: find invalid IDs made by repeating the same number twice
 let sum = processRanges(true);
 console.log("Sum of invalid IDs (same number twice):", sum);
 
-// task 2: find invalid IDs made by repeating a smaller fragment
+// part 2: find invalid IDs made by repeating a smaller fragment
 sum = processRanges(false);
 console.log("Sum of invalid IDs (repeated fragment):", sum);
