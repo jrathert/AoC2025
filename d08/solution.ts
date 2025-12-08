@@ -7,6 +7,7 @@
 // part 2: Iterate further until only one set remains, mutliply the x-values of the last points
 
 
+import { assert } from "console";
 import { inputFileName, readFileAsStringArray } from "../aoc/input";
 
 const fname = inputFileName(__dirname);
@@ -83,37 +84,32 @@ function processInput(data: string[]) {
 
         ct = sortedTuples.pop();
         if (ct === undefined) {
-            // should not happen
+            // should not happen according to problem statement
             console.log("Error - no more distances in stack");
             break;
         }
 
-        // console.log(`Processing points (${ct.first.x},${currDist.first.y},${ct.first.z}) and (${ct.second.x},${ct.second.y},${ct.second.z}) - (distance: ${ct.dist})`);
+        if (ct.first.set === ct.second.set) {
+            // both points already in same set - nothing to do
+            continue;
+        }   
 
-        // if first only its own set -> add it to set of second point
-        if (ct.first.set.size === 1) {
-            ct.second.set.add(ct.first);
-            allSets.delete(ct.first.set);
-            ct.first.set = ct.second.set;
+        // merge the sets of both points
+        // first ensure the set of the first point in the tuple is larger or equal to 
+        // the set of the second point ...
+        if (ct.first.set.size < ct.second.set.size) {
+            let temp = ct.first;
+            ct.first = ct.second;
+            ct.second = temp;
         }
-        // if second only its own set -> add it to the set of first point
-        else if (ct.second.set.size === 1) {
-            ct.first.set.add(ct.second);
-            allSets.delete(ct.second.set);
-            ct.second.set = ct.first.set;
+        // ... now move all points of smaller set (of second point) into larger set (of first point)
+        let setToBeRemoved = ct.second.set;
+        for (let p of setToBeRemoved) {
+            ct.first.set.add(p);
+            p.set = ct.first.set;
         }
-        // both in different sets -> merge
-        else if (ct.first.set !== ct.second.set) {
-            // merge sets (can be optimized to merge smaller into larger)
-            let set1 = ct.first.set;
-            let set2 = ct.second.set;
-            for (let p of set2) {
-                set1.add(p);
-                allSets.delete(p.set);
-                p.set = set1;
-            }
-            ct.second.set = ct.first.set;
-        }
+        // delete the smaller set which is no more needed
+        allSets.delete(setToBeRemoved);
 
         if (i === part1Iterations) {
             // part 1 is done - sort sets by size (biggest first) 
